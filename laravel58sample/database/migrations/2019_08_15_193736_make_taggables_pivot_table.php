@@ -18,12 +18,15 @@ class MakeTaggablesPivotTable extends Migration
             taggable_id - integer
             taggable_type - string
          */
-        Schema::create('taggables', function (Blueprint $table) {
-            $table->bigInteger('tag_id');
-            $table->bigInteger('taggable_id');
-            $table->string("taggable_type");
-            $table->timestamps();
-        });
+        Schema::create(
+            'taggables',
+            function (Blueprint $table) {
+                $table->bigInteger('tag_id');
+                $table->bigInteger('taggable_id');
+                $table->string("taggable_type");
+                $table->timestamps();
+            }
+        );
     }
 
     /**

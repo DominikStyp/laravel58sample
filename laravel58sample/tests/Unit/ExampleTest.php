@@ -9,7 +9,8 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 class ExampleTest extends TestCase
 {
 
-    public function add(int $a, int $b): int {
+    public function add(int $a, int $b): int
+    {
         return $a + $b;
     }
     /**

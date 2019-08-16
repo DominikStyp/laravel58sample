@@ -14,9 +14,9 @@ class CategorySeeder extends Seeder
     {
         factory(Category::class, 50)->create()->each(function ($category) {
             $tagsIds = [
-                mt_rand(21,30),
-                mt_rand(21,30),
-                mt_rand(21,30),
+                mt_rand(21, 30),
+                mt_rand(21, 30),
+                mt_rand(21, 30),
             ];
             /** @var $category Category */
             $category->tags()->attach($tagsIds);

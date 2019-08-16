@@ -12,8 +12,7 @@ class TagSeeder extends Seeder
      */
     public function run()
     {
-        factory(Tag::class, 50)->create()->each(function($tag){
-
+        factory(Tag::class, 50)->create()->each(function ($tag) {
         });
     }
 }

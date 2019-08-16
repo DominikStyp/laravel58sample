@@ -7,9 +7,11 @@ namespace Tests\Unit;
 use Illuminate\Support\Collection;
 use Tests\TestCase;
 
-class CollectionsTest extends TestCase {
+class CollectionsTest extends TestCase
+{
 
-    public function testCountMultidimensionalArray() {
+    public function testCountMultidimensionalArray()
+    {
         $arr = [];
         $arr[1][1] = 1;
         $arr[3][2] = 2;
@@ -26,13 +28,14 @@ class CollectionsTest extends TestCase {
         $this->assertEquals(6, collect($arr)->flatten()->count());
         // array_walk_recursive count
         $walkCounter = 0;
-        array_walk_recursive($arr, function($element) use (& $walkCounter) {
+        array_walk_recursive($arr, function ($element) use (& $walkCounter) {
             $walkCounter++;
         });
         $this->assertEquals(6, $walkCounter);
     }
 
-    public function testGroupMultidimensionalArrays1() {
+    public function testGroupMultidimensionalArrays1()
+    {
         $data = collect([
             10 => ['user' => "Peter", 'skill' => 1, 'roles' => ['admin', 'moderator', 'viewer']],
             20 => ['user' => "John", 'skill' => 1, 'roles' => ['admin', 'viewer']],
@@ -56,10 +59,10 @@ class CollectionsTest extends TestCase {
         $skill2Moderators_value = current($skill2Moderators);
         $this->assertEquals(40, $skill2Moderators_key);
         $this->assertEquals("Jason", $skill2Moderators_value["user"]);
-
     }
 
-    public function testGroupMultidimensionalArrays2() {
+    public function testGroupMultidimensionalArrays2()
+    {
         $data = collect([
             10 => ['user' => "Peter", 'skill' => 1, 'roles' => ['admin', 'moderator', 'viewer']],
             20 => ['user' => "John", 'skill' => 1, 'roles' => ['admin', 'viewer']],
@@ -77,21 +80,22 @@ class CollectionsTest extends TestCase {
         // retrieve people with skill 1
         $result->get(1)
                // filter by moderator
-               ->filter(function($value, $key) {
+               ->filter(function ($value, $key) {
                         return $key === "moderator";
-                })
-               ->each(function($skillCollection, $key){
+               })
+               ->each(function ($skillCollection, $key) {
                         /** @var $skillCollection Collection */
-                        $skillCollection->each(function($user, $key){
+                        $skillCollection->each(function ($user, $key) {
                             // only Peter is the mooderator in our grouped collection
                             $this->assertEquals("Peter", $user["user"]);
                             var_dump($key);
                             var_dump($user);
                         });
-            });
+               });
     }
 
-    public function testEachSpreadOnCollection(){
+    public function testEachSpreadOnCollection()
+    {
         $collection = collect([
             ['name' => 'John', 'age' => 30],
             ['name' => 'Cat', 'age' => 4],
@@ -101,7 +105,7 @@ class CollectionsTest extends TestCase {
         //             2) turn it from array to a collection
         //             3) flatten it
         //             4) turn it to array again
-        $collection = $collection->map(function($value, $key){
+        $collection = $collection->map(function ($value, $key) {
             return collect($value)->flatten()->toArray();
         });
         // here we spread each array key to the function arguments
@@ -111,6 +115,4 @@ class CollectionsTest extends TestCase {
             $this->assertTrue(in_array($age, [30, 4]));
         });
     }
-
-
 }

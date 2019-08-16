@@ -14,14 +14,14 @@ class PostsSeeder extends Seeder
     public function run()
     {
         factory(Post::class, 300)->create()->each(function ($post) {
-                 $categoriesIds = [  mt_rand(1,50), mt_rand(1,50),
-                           mt_rand(1,50), mt_rand(1,50),
-                           mt_rand(1,50)
+                 $categoriesIds = [  mt_rand(1, 50), mt_rand(1, 50),
+                           mt_rand(1, 50), mt_rand(1, 50),
+                           mt_rand(1, 50)
                  ];
                  $tagsIds = [
-                     mt_rand(1,20),
-                     mt_rand(1,20),
-                     mt_rand(1,20)
+                     mt_rand(1, 20),
+                     mt_rand(1, 20),
+                     mt_rand(1, 20)
                  ];
                  /** @var $post Post */
                  $post->categories()->attach($categoriesIds);
