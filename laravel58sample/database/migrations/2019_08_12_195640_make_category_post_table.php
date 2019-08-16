@@ -13,9 +13,19 @@ class MakeCategoryPostTable extends Migration
      */
     public function up()
     {
+        /*
+         * NOTICE!!
+         * While referencing pivot table Laravel will use ALPHABETICAL order of join of table names
+         * For example:
+         * Category + Post = category_post
+         * User + Attribute = attribute_user
+         * Role + VeryInterestedPerson = role_very_interested_person
+         *
+         */
         Schema::create('category_post', function (Blueprint $table) {
             $table->bigInteger("category_id");
             $table->bigInteger("post_id");
+            $table->timestamps();
         });
     }
 
