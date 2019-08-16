@@ -48,6 +48,8 @@
     "minimum-stability": "dev",
     "prefer-stable": true,
     "scripts": {
+        "phpcs": "phpcs --standard=ruleset.xml app/",
+        "fixCode": "phpcbf --standard=ruleset.xml app/",
         "post-autoload-dump": [
             "Illuminate\\Foundation\\ComposerScripts::postAutoloadDump",
             "@php artisan package:discover --ansi"
