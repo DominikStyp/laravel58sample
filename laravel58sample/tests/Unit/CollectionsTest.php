@@ -88,8 +88,8 @@ class CollectionsTest extends TestCase
                         $skillCollection->each(function ($user, $key) {
                             // only Peter is the mooderator in our grouped collection
                             $this->assertEquals("Peter", $user["user"]);
-                            var_dump($key);
-                            var_dump($user);
+                            //var_dump($key);
+                            //var_dump($user);
                         });
                });
     }
