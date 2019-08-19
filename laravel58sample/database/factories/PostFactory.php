@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\Factory;
 
 $factory->define(Post::class, function (Faker $faker) {
     return [
-        'title' => $faker->title,
+        'title' => $faker->text(50),
         'content' => $faker->realText(),
         'user_id' => mt_rand(1, max(User::count(), 1))
     ];

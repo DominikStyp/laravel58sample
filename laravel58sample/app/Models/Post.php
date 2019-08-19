@@ -2,15 +2,34 @@
 
 namespace App\Models;
 
+use App\User;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\App;
 
+/**
+ * Class Post
+ * @package App\Models
+ *
+ * @property string $title
+ * @property string $content
+ * @property User $users
+ *
+ */
 class Post extends Model
 {
     public $table = 'posts';
+    public $fillable = ['title', 'content', 'user_id'];
 
     /**
-     * The roles that belong to the user.
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
      */
     public function categories()
     {
@@ -36,6 +55,8 @@ class Post extends Model
      * Here we define morphing relationship which means
      * that we can associate tags with many different models,
      * not just one like it is with regular relationship
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\MorphToMany
      */
     public function tags()
     {
