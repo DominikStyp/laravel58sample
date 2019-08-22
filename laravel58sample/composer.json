@@ -49,6 +49,10 @@
     "minimum-stability": "dev",
     "prefer-stable": true,
     "scripts": {
+        "test": [
+            "@php artisan migrate:refresh --seed",
+            "vendor\\bin\\phpunit"
+        ],
         "phpcs": "phpcs --standard=ruleset.xml app/",
         "fixCode": "phpcbf --standard=ruleset.xml app/",
         "post-autoload-dump": [
