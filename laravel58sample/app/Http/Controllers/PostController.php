@@ -35,6 +35,7 @@ class PostController extends Controller
     {
         $resource = $request->getContent();
         $postData = \json_decode($resource, true);
+        $postData['user_id'] = $request->user()->id;
         $newPost = Post::create($postData);
         $postResource = new PostResource($newPost);
         return response()->json($postResource, Response::HTTP_CREATED);

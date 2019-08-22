@@ -13,7 +13,7 @@ class PostsSeeder extends Seeder
      */
     public function run()
     {
-        factory(Post::class, 300)->create()->each(function ($post) {
+        factory(Post::class, 100)->create()->each(function ($post) {
                  $categoriesIds = [  mt_rand(1, 50), mt_rand(1, 50),
                            mt_rand(1, 50), mt_rand(1, 50),
                            mt_rand(1, 50)
