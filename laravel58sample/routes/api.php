@@ -21,8 +21,13 @@ Route::group(['middleware' => 'auth:api'], function() {
     Route::post('posts', 'PostController@store');
     Route::put('posts/{post}', 'PostController@update')->middleware('can:update,post');
     Route::delete('posts/{post}', 'PostController@delete')->middleware('can:delete,post');
+
+    ////// gates test routes
+    Route::get('gates/seePost/{post}', 'GatesController@seePost');
 });
 
 Route::post('login', 'Auth\LoginController@login');
 Route::post('logout', 'Auth\LoginController@logout');
 Route::post('register', 'Auth\RegisterController@register');
+
+

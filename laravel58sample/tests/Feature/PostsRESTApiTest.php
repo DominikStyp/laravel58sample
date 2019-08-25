@@ -137,7 +137,6 @@ class PostsRESTApiTest extends TestCase
 
     public function testUpdateAuthorizedAsPostOwner()
     {
-
         /** @var Post $randomPost */
         $randomPost = Post::find(10);
         /** @var User $postOwner */
@@ -162,6 +161,38 @@ class PostsRESTApiTest extends TestCase
         $lastPostNextCheck = Post::find($lastPost->id);
         $this->assertEmpty($lastPostNextCheck);
     }
+
+    public function testGatesSeePostIsAllowedByGate()
+    {
+        /** @var Post $randomPost */
+        $randomPost = Post::find(3);
+        /** @var User $postOwner */
+        $postOwner = $randomPost->user;
+        $apiToken = $postOwner->generateToken();
+        $response = $this->get("/api/gates/seePost/{$randomPost->id}", [
+            'Authorization' => 'Bearer ' . $apiToken,
+            'Accept' => 'application/json',
+        ]);
+        $response->assertStatus(Response::HTTP_OK);
+        $response->assertJsonStructure([
+            'id', 'title', 'content', 'user_id', 'created_at', 'updated_at'
+        ]);
+    }
+
+    public function testGatesSeePostIsDeniedByGate()
+    {
+        $apiToken = "ooooooooooooooooooooo";
+        $response = $this->get("/api/gates/seePost/5", [
+            'Authorization' => 'Bearer ' . $apiToken,
+            'Accept' => 'application/json',
+        ]);
+        $response->assertStatus(Response::HTTP_UNAUTHORIZED);
+        $response->assertJsonStructure([
+            'error'
+        ]);
+    }
+
+
 
 
 }
